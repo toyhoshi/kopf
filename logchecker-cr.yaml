@@ -1,0 +1,9 @@
+apiVersion: oci.operator/v1
+kind: LogChecker
+metadata:
+  name: example-logchecker
+spec:
+  deploymentName: random-logger
+  namespace: default
+  searchString: "ERROR"
+

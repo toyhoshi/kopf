@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logchecker-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logchecker-operator
+  template:
+    metadata:
+      labels:
+        app: logchecker-operator
+      annotations:
+        serviceaccounts.kubernetes.io/autoupdate: "true"
+    spec:
+      serviceAccountName: logchecker-operator
+      containers:
+      - name: logchecker-operator
+        image: logchecker-operator:0.7
+        env:
+        - name: KUBERNETES_SERVICE_HOST
+          value: "kubernetes.default.svc"
+        - name: KUBERNETES_SERVICE_PORT
+          value: "443"
+
